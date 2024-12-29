@@ -1,4 +1,4 @@
 <template>
-  <button>Kick me moron</button>
+  <button>Light click</button>
 </template>
 t
