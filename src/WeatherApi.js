@@ -6,8 +6,12 @@ export async function getWeather(city) {
   const res = await axios.get(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
   );
+  console.log(res.data)
     return res.data;
 }
+
+
+export default getWeather;
 
 // export const getWeather = async (city) => {
 //   try {
@@ -24,5 +28,3 @@ export async function getWeather(city) {
 //     throw error;
 //   }
 // };
-
-export default getWeather;

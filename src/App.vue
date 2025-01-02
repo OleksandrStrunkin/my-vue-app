@@ -3,7 +3,7 @@
     <h1>Прогноз погоди</h1>
     <p>Прогноз погоди у {{ city === "" ? "вашому місті" : cityName }}</p>
     <input v-model="city" class="input_cl" type="text" placeholder="Місто">
-    <button @click="getWeather()" v-if="city !== ''" type="button">Отримати погоду</button>
+    <button @click="fetchWeather()" v-if="city !== ''" type="button">Отримати погоду</button>
     <button v-else disabled type="button">Введіть назву міста</button>
     <p v-if="error !== ''">{{ error }}</p>
     <p v-if="info !== null">{{ info.name }}</p>
@@ -33,6 +33,7 @@ export default {
         return;
       }
 
+      this.info = null;
       this.error = "";
       try {
         const weatherData = await getWeather(this.city);
@@ -41,7 +42,8 @@ export default {
         this.error = "Не вдалося отримати дані про погоду. Перевірте назву міста.";
       }
     }
-  },
+  }
+}
 </script>
 
 <style scoped>
