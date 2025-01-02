@@ -6,7 +6,16 @@
     <button @click="fetchWeather()" v-if="city !== ''" type="button">Отримати погоду</button>
     <button v-else disabled type="button">Введіть назву міста</button>
     <p v-if="error !== ''">{{ error }}</p>
-    <p v-if="info !== null">{{ info.name }}</p>
+    <div v-if="info && info.cityName">
+      <h2>{{ info.cityName }}, {{ info.country }}</h2>
+      <p>Температура: {{ info.temperature }}°C</p>
+      <p>Швидкість вітру: {{ info.windSpeed }} м/с</p>
+      <p>Хмарність: {{ info.cloudiness }}%</p>
+      <p>Схід сонця: {{ info.sunrise }}</p>
+      <p>Захід сонця: {{ info.sunset }}</p>
+      <p>Опис: {{ info.description }}</p>
+      <img :src="info.icon" alt="Weather icon" />
+    </div>
   </div>
 </template>
 
@@ -18,8 +27,18 @@ export default {
     return {
       city: "",
       error: "",
-      info: null,
-    }
+      info: {
+        cityName: null,
+        country: null,
+        temperature: null,
+        windSpeed: null,
+        cloudiness: null,
+        sunrise: null,
+        sunset: null,
+        icon: null,
+        description: null,
+      }
+    };
   },
   computed: {
     cityName() {
@@ -37,7 +56,18 @@ export default {
       this.error = "";
       try {
         const weatherData = await getWeather(this.city);
-        this.info = weatherData;
+
+        this.info = {
+          cityName: weatherData.name,
+          country: weatherData.sys.country,
+          temperature: (weatherData.main.temp - 273.15).toFixed(1), // Перетворення з Кельвінів у Цельсії
+          windSpeed: weatherData.wind.speed,
+          cloudiness: weatherData.clouds.all, // % хмарності
+          sunrise: new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString(), // Формат часу
+          sunset: new Date(weatherData.sys.sunset * 1000).toLocaleTimeString(),
+          icon: `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`, // Іконка
+          description: weatherData.weather[0].description
+        };
       } catch (error) {
         this.error = "Не вдалося отримати дані про погоду. Перевірте назву міста.";
       }
@@ -49,7 +79,7 @@ export default {
 <style scoped>
   .wrapper {
     width: 900px;
-    height: 500px;
+    min-height: 500px;
     border-radius: 25px;
     padding: 10px;
     background: black;
