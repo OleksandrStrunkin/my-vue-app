@@ -7,7 +7,7 @@
         <p>Хмарність: {{ info.cloudiness }}%</p>
         <p>Схід сонця: {{ info.sunrise }}</p>
         <p>Захід сонця: {{ info.sunset }}</p>
-        <p>Опис: {{ info.description }}</p>
+        <p>Хмарність: {{ info.description }}</p>
         <!-- <img :src="info.icon" alt="Weather icon" /> -->
       </div>
     </div>
