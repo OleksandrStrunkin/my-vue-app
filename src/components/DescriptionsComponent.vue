@@ -8,7 +8,7 @@
         <p>Схід сонця: {{ info.sunrise }}</p>
         <p>Захід сонця: {{ info.sunset }}</p>
         <p>Опис: {{ info.description }}</p>
-        <img :src="info.icon" alt="Weather icon" />
+        <!-- <img :src="info.icon" alt="Weather icon" /> -->
       </div>
     </div>
 </template>
@@ -38,7 +38,16 @@ export default {
     display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(3, 1fr);
-      grid-column-gap: 5px;
-      grid-row-gap: 6px;
+      grid-row-gap: 10px;
+      grid-column-gap: 200px;
+  }
+  .box p {
+    width: 100%;
+    border: 2px solid #6d2d7d;
+    background-color: rgba(255, 0, 0, 0.089);
+    border-radius: 5px;
+    padding: 15px 15px;
+    flex-grow: 1;
+    font-size: large;
   }
 </style>

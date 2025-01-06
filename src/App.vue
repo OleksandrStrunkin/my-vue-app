@@ -106,21 +106,21 @@ export default {
   }
 
   .wrapper button {
-    background: #e3bc4d;
+    background: #6d2d7d61;
     color: #fff;
     border-radius: 10px;
-    border: 2px solid #b99935;
+    border: 2px solid #6d2d7d;
     padding: 10px 15px;
     margin-left: 20px;
     cursor: pointer;
-    transition: transform 500ms ease;
+    transition: background 500ms ease;
   }
 
   .wrapper button:hover {
-    transform: scale(1.1);
+    background:#6d2d7d;
   }
   .wrapper button:disabled {
-    background-color: #8d783c;
-    transform: scale(1);
+    background-color: #6d2d7d27;
+    color: #ffffff6a;
   }
 </style>
