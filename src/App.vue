@@ -6,23 +6,18 @@
     <button @click="fetchWeather()" v-if="city !== ''" type="button">Отримати погоду</button>
     <button v-else disabled type="button">Введіть назву міста</button>
     <p v-if="error !== ''">{{ error }}</p>
-    <div v-if="info && info.cityName">
-      <h2>{{ info.cityName }}, {{ info.country }}</h2>
-      <p>Температура: {{ info.temperature }}°C</p>
-      <p>Швидкість вітру: {{ info.windSpeed }} м/с</p>
-      <p>Хмарність: {{ info.cloudiness }}%</p>
-      <p>Схід сонця: {{ info.sunrise }}</p>
-      <p>Захід сонця: {{ info.sunset }}</p>
-      <p>Опис: {{ info.description }}</p>
-      <img :src="info.icon" alt="Weather icon" />
-    </div>
+    <DescriptionsComponent :info="info"/>
   </div>
 </template>
 
 <script>
 import getWeather from './WeatherApi';
+import DescriptionsComponent from './components/DescriptionsComponent.vue';
 
 export default {
+  components: {
+    DescriptionsComponent,
+  },
   data() {
     return {
       city: "",
